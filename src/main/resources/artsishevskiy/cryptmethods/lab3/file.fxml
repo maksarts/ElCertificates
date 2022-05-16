@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="609.0" prefWidth="878.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="artsishevskiy.cryptmethods.lab3.FileController">
+    <children>
+        <Text fill="WHITE" layoutX="26.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Имя пользователя:" wrappingWidth="213.6044921875">
+            <font>
+                <Font name="Californian FB Bold" size="23.0" />
+            </font>
+        </Text>
+        <TextField fx:id="text_user_name" editable="false" layoutX="26.0" layoutY="92.0" prefHeight="32.0" prefWidth="277.0" />
+        <MenuBar fx:id="menu" prefHeight="23.0" prefWidth="878.0" style="-fx-background-color: orange;">
+            <menus>
+                <Menu mnemonicParsing="false" text="Файл">
+                    <items>
+                  <MenuItem fx:id="menuButtonSave" mnemonicParsing="false" onAction="#OnAction_menuButtonSave" text="Сохранить" />
+                  <MenuItem fx:id="menuButtonLoad" mnemonicParsing="false" onAction="#OnAction_menuButtonLoad" text="Загрузить" />
+                        <MenuItem fx:id="menuButtonExit" mnemonicParsing="false" onAction="#OnAction_menuButtonExit" text="Выход" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Сертификаты">
+                    <items>
+                  <MenuItem fx:id="menuButtonChoose" mnemonicParsing="false" onAction="#OnAction_menuButtonChoose" text="Выбрать" />
+                        <MenuItem fx:id="menuButtonDelete" mnemonicParsing="false" onAction="#OnAction_menuButtonDelete" text="Удалить" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Прочее">
+                    <items>
+                        <MenuItem fx:id="menuButtonAbout" mnemonicParsing="false" onAction="#OnAction_menuButtonAbout" text="О программе" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Button fx:id="Button_ChooseUser" layoutX="303.0" layoutY="92.0" mnemonicParsing="false" onAction="#OnAction_Button_ChooseUser" prefHeight="32.0" prefWidth="178.0" style="-fx-background-color: orange;" text="Выбрать сертификат" />
+        <TextField fx:id="text_author_name" editable="false" layoutX="533.0" layoutY="92.0" prefHeight="32.0" prefWidth="317.0" />
+        <Text fill="WHITE" layoutX="533.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Автор документа:" wrappingWidth="213.6044921875">
+            <font>
+                <Font name="Californian FB Bold" size="23.0" />
+            </font>
+        </Text>
+        <Button fx:id="Button_Save" layoutX="505.0" layoutY="527.0" mnemonicParsing="false" onAction="#OnAction_Button_Save" prefHeight="47.0" prefWidth="348.0" style="-fx-background-color: orange;" text="Сохранить">
+            <font>
+                <Font size="21.0" />
+            </font>
+        </Button>
+        <Button fx:id="Button_DownloadDoc" layoutX="26.0" layoutY="527.0" mnemonicParsing="false" onAction="#OnAction_Button_DownloadDoc" prefHeight="47.0" prefWidth="348.0" style="-fx-background-color: orange;" text="Загрузить подписанный документ">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <TextArea fx:id="text_edit_field" layoutX="26.0" layoutY="157.0" prefHeight="354.0" prefWidth="824.0" />
+        <Label fx:id="labelErrorUser" layoutX="26.0" layoutY="124.0" prefHeight="32.0" prefWidth="824.0" />
+        <Label fx:id="labelErrorLoad" layoutX="24.0" layoutY="490.0" prefHeight="32.0" prefWidth="830.0" />
+        <Label fx:id="labelErrorSave" layoutX="24.0" layoutY="572.0" prefHeight="32.0" prefWidth="830.0" />
+    </children>
+</AnchorPane>
