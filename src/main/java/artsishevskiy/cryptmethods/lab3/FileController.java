@@ -21,6 +21,8 @@ import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.awt.Toolkit;
+
 public class FileController {
 
     private Stage stageAbout;
@@ -107,6 +109,7 @@ public class FileController {
         label_error_save.setText("Сертификат успешно удален");
         label_error_save.setTextFill(Color.GREEN);
         label_error_save.setAlignment(Pos.TOP_CENTER);
+        Toolkit.getDefaultToolkit().beep();
     }
 
     @FXML
@@ -190,12 +193,15 @@ public class FileController {
             label_error_save.setTextFill(Color.RED);
             label_error_save.setText("Документ не подписан, возможно, поврежден сертификат");
             label_error_save.setAlignment(Pos.CENTER);
+            Toolkit.getDefaultToolkit().beep();
+
         } else {
             label_error_save.setTextFill(Color.GREEN);
             label_error_save.setText("Документ успешно подписан");
             label_error_save.setAlignment(Pos.CENTER);
             text_edit_field.setText("");
             text_author_name.setText("");
+            Toolkit.getDefaultToolkit().beep();
         }
     }
 
@@ -221,6 +227,7 @@ public class FileController {
             label_error_save.setText("Сертификат поврежден или не существует");
             label_error_save.setAlignment(Pos.CENTER);
             label_error_save.setTextFill(Color.RED);
+            Toolkit.getDefaultToolkit().beep();
             return;
         }
 

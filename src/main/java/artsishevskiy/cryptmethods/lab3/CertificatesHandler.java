@@ -47,16 +47,16 @@ public class CertificatesHandler {
         }
     }
 
-    public boolean hasIt(String alias) {
-        try {
-            //String enc = getEncodedString(alias);
-            String enc = unconvert(alias);
-            return keyStore.containsAlias(enc) && keyStore.isKeyEntry(enc) && keyStore.getCertificate(enc) != null;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return false;
-    }
+//    public boolean hasIt(String alias) {
+//        try {
+//            //String enc = getEncodedString(alias);
+//            String enc = unconvert(alias);
+//            return keyStore.containsAlias(enc) && keyStore.isKeyEntry(enc) && keyStore.getCertificate(enc) != null;
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//        return false;
+//    }
 
 //    public String getDecodedString(String encoded) {
 //        StringBuilder decoded = new StringBuilder();
