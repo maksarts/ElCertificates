@@ -125,6 +125,7 @@ public class FileController {
         label_error_save.setText("");
         label_error_user.setText("");
         text_edit_field.setText("");
+        text_author_name.setText("");
 
         if (!isChosen) {
             handler.init();
@@ -134,14 +135,14 @@ public class FileController {
 
             while (handler.data.hasMoreElements()) {
                 String name = handler.data.nextElement();
-                users.add(handler.getDecodedString(name));
+//                users.add(handler.getDecodedString(name));
 
-//                try{
-//                    users.add(handler.convert(name));
-//                } catch (UnsupportedEncodingException e) {
-//                    System.out.println("\nПроблема с изменением кодировки при выводе списка сертификатов");
-//                    e.printStackTrace();
-//                }
+                try{
+                    users.add(handler.convert(name));
+                } catch (UnsupportedEncodingException e) {
+                    System.out.println("\nПроблема с изменением кодировки при выводе списка сертификатов");
+                    e.printStackTrace();
+                }
 
 
 //                System.out.println(certificates.hasIt(certificates.getDecodedString(name)));
@@ -194,6 +195,7 @@ public class FileController {
             label_error_save.setText("Документ успешно подписан");
             label_error_save.setAlignment(Pos.CENTER);
             text_edit_field.setText("");
+            text_author_name.setText("");
         }
     }
 

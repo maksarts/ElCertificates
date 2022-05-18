@@ -18,10 +18,13 @@ public class CertificatesHandler {
     //private String algorithm = "SHA1withRSA";
     private String algorithm = "MD5withRSA";
 
-    private String alphabetUpper        = "ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞß";
-    private String alphabetLower        = "àáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ";
-    private String rightAlphabetUpper   = "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
-    private String rightAlphabetLower   = "абвгдежзийклмнопрстуфхцчшщъыьэюя";
+    // костыль для работы с кодировками
+    private String kostil = "";
+
+//    private String alphabetUpper        = "ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞß";
+//    private String alphabetLower        = "àáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ";
+//    private String rightAlphabetUpper   = "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
+//    private String rightAlphabetLower   = "абвгдежзийклмнопрстуфхцчшщъыьэюя";
     // не смог найти нормальныу кодировки,
     // пришлось изобретать велосипед,
     // буква ё все ломает...
@@ -46,7 +49,8 @@ public class CertificatesHandler {
 
     public boolean hasIt(String alias) {
         try {
-            String enc = getEncodedString(alias);
+            //String enc = getEncodedString(alias);
+            String enc = unconvert(alias);
             return keyStore.containsAlias(enc) && keyStore.isKeyEntry(enc) && keyStore.getCertificate(enc) != null;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -54,47 +58,56 @@ public class CertificatesHandler {
         return false;
     }
 
-    public String getDecodedString(String encoded) {
-        StringBuilder decoded = new StringBuilder();
-
-        for (var c : encoded.split("")) {
-            if (alphabetLower.contains(c)) {
-                decoded.append(rightAlphabetLower.charAt(alphabetLower.indexOf(c)));
-            } else if (alphabetUpper.contains(c)) {
-                decoded.append(rightAlphabetUpper.charAt(alphabetUpper.indexOf(c)));
-            } else {
-                decoded.append(c);
-            }
-        }
-
-        return decoded.toString();
-    }
+//    public String getDecodedString(String encoded) {
+//        StringBuilder decoded = new StringBuilder();
+//
+//        for (var c : encoded.split("")) {
+//            if (alphabetLower.contains(c)) {
+//                decoded.append(rightAlphabetLower.charAt(alphabetLower.indexOf(c)));
+//            } else if (alphabetUpper.contains(c)) {
+//                decoded.append(rightAlphabetUpper.charAt(alphabetUpper.indexOf(c)));
+//            } else {
+//                decoded.append(c);
+//            }
+//        }
+//
+//        return decoded.toString();
+//    }
 
     public String convert(String inString) throws UnsupportedEncodingException {
         byte[] bytes=inString.getBytes("unicode");
         String temp = new String(bytes, "windows-1251");
+        kostil = temp.substring(0, 2);
         return temp.substring(2, temp.length());
     }
 
-    private String getEncodedString(String encoded) {
-        StringBuilder decoded = new StringBuilder();
-
-        for (var c : encoded.split("")) {
-            if (rightAlphabetLower.contains(c)) {
-                decoded.append(alphabetLower.charAt(rightAlphabetLower.indexOf(c)));
-            } else if (rightAlphabetUpper.contains(c)) {
-                decoded.append(alphabetUpper.charAt(rightAlphabetUpper.indexOf(c)));
-            } else {
-                decoded.append(c);
-            }
-        }
-
-        return decoded.toString();
+    public String unconvert(String inString) throws UnsupportedEncodingException {
+        inString = kostil+inString;
+        byte[] bytes=inString.getBytes("windows-1251");
+        String temp = new String(bytes, "unicode");
+        return temp;
     }
+
+//    private String getEncodedString(String encoded) {
+//        StringBuilder decoded = new StringBuilder();
+//
+//        for (var c : encoded.split("")) {
+//            if (rightAlphabetLower.contains(c)) {
+//                decoded.append(alphabetLower.charAt(rightAlphabetLower.indexOf(c)));
+//            } else if (rightAlphabetUpper.contains(c)) {
+//                decoded.append(alphabetUpper.charAt(rightAlphabetUpper.indexOf(c)));
+//            } else {
+//                decoded.append(c);
+//            }
+//        }
+//
+//        return decoded.toString();
+//    }
 
     public boolean signDoc(String alias, String text, String path) {
         try {
-            String enc = getEncodedString(alias);
+            //String enc = getEncodedString(alias);
+            String enc = unconvert(alias);
 
             Certificate certificate = keyStore.getCertificate(enc);
             PublicKey publicKey = certificate.getPublicKey();
@@ -226,7 +239,8 @@ public class CertificatesHandler {
 
     public void deleteCertificate(String alias) {
         try {
-            String enc = getEncodedString(alias);
+            //String enc = getEncodedString(alias);
+            String enc = unconvert(alias);
             keyStore.deleteEntry(enc);
         } catch (Exception e) {
             e.printStackTrace();
