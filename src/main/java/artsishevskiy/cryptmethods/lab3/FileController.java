@@ -104,7 +104,6 @@ public class FileController {
         text_edit_field.setDisable(true);
         Button_Save.setDisable(true);
         Button_DownloadDoc.setDisable(true);
-//        buttonLoad.setDisable(true);
 
         label_error_save.setText("Сертификат успешно удален");
         label_error_save.setTextFill(Color.GREEN);
@@ -138,7 +137,6 @@ public class FileController {
 
             while (handler.data.hasMoreElements()) {
                 String name = handler.data.nextElement();
-//                users.add(handler.getDecodedString(name));
 
                 try{
                     users.add(handler.convert(name));
@@ -148,7 +146,6 @@ public class FileController {
                 }
 
 
-//                System.out.println(certificates.hasIt(certificates.getDecodedString(name)));
             }
             listView.setItems(FXCollections.observableArrayList(users));
         }
@@ -256,8 +253,8 @@ public class FileController {
         assert menuButtonLoad != null : "fx:id=\"menuButtonLoad\" was not injected: check your FXML file 'file.fxml'.";
 
         text_edit_field.setDisable(true);
-        text_author_name.setDisable(true);
-        text_user_name.setDisable(true);
+        text_author_name.setEditable(false);
+        text_user_name.setEditable(false);
 
         Button_Save.setDisable(true);
         Button_DownloadDoc.setDisable(true);
