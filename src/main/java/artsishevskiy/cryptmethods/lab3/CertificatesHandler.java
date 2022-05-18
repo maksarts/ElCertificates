@@ -1,6 +1,7 @@
 package artsishevskiy.cryptmethods.lab3;
 
 import java.io.ByteArrayInputStream;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -67,6 +68,12 @@ public class CertificatesHandler {
         }
 
         return decoded.toString();
+    }
+
+    public String convert(String inString) throws UnsupportedEncodingException {
+        byte[] bytes=inString.getBytes("unicode");
+        String temp = new String(bytes, "windows-1251");
+        return temp.substring(2, temp.length());
     }
 
     private String getEncodedString(String encoded) {
@@ -169,7 +176,8 @@ public class CertificatesHandler {
             PublicKey publicKey = certificate.getPublicKey();
             signature.initVerify(publicKey);
             signature.update(btxt);
-            return getDecodedString(keyStore.getCertificateAlias(certificate));
+            //return getDecodedString(keyStore.getCertificateAlias(certificate));
+            return convert(keyStore.getCertificateAlias(certificate));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
