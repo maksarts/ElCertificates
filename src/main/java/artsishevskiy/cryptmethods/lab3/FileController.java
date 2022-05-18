@@ -18,7 +18,9 @@ import javafx.stage.Stage;
 
 public class FileController {
 
-    Stage stageAbout;
+    private Stage stageAbout;
+    private CertificatesHandler handler;
+    private boolean isChosen = false;
 
     @FXML
     private ResourceBundle resources;
@@ -45,9 +47,6 @@ public class FileController {
     private MenuItem menuButtonDelete;
 
     @FXML
-    private Label labelErrorSave;
-
-    @FXML
     private TextArea text_edit_field;
 
     @FXML
@@ -60,10 +59,10 @@ public class FileController {
     private Button Button_ChooseUser;
 
     @FXML
-    private Label labelErrorUser;
+    private Label label_error_save;
 
     @FXML
-    private Label labelErrorLoad;
+    private Label label_error_user;
 
     @FXML
     private Button Button_DownloadDoc;
@@ -86,7 +85,7 @@ public class FileController {
 
     @FXML
     void OnAction_menuButtonExit(ActionEvent event) {
-
+        System.exit(0);
     }
 
     @FXML
@@ -133,13 +132,12 @@ public class FileController {
         assert menuButtonExit != null : "fx:id=\"menuButtonExit\" was not injected: check your FXML file 'file.fxml'.";
         assert menu != null : "fx:id=\"menu\" was not injected: check your FXML file 'file.fxml'.";
         assert menuButtonDelete != null : "fx:id=\"menuButtonDelete\" was not injected: check your FXML file 'file.fxml'.";
-        assert labelErrorSave != null : "fx:id=\"labelErrorSave\" was not injected: check your FXML file 'file.fxml'.";
+        assert label_error_save != null : "fx:id=\"labelErrorSave\" was not injected: check your FXML file 'file.fxml'.";
         assert text_edit_field != null : "fx:id=\"text_edit_field\" was not injected: check your FXML file 'file.fxml'.";
         assert Button_Save != null : "fx:id=\"Button_Save\" was not injected: check your FXML file 'file.fxml'.";
         assert menuButtonAbout != null : "fx:id=\"menuButtonAbout\" was not injected: check your FXML file 'file.fxml'.";
         assert Button_ChooseUser != null : "fx:id=\"Button_ChooseUser\" was not injected: check your FXML file 'file.fxml'.";
-        assert labelErrorUser != null : "fx:id=\"labelErrorUser\" was not injected: check your FXML file 'file.fxml'.";
-        assert labelErrorLoad != null : "fx:id=\"labelErrorLoad\" was not injected: check your FXML file 'file.fxml'.";
+        assert label_error_user != null : "fx:id=\"labelErrorUser\" was not injected: check your FXML file 'file.fxml'.";
         assert Button_DownloadDoc != null : "fx:id=\"Button_DownloadDoc\" was not injected: check your FXML file 'file.fxml'.";
         assert text_user_name != null : "fx:id=\"text_user_name\" was not injected: check your FXML file 'file.fxml'.";
         assert menuButtonLoad != null : "fx:id=\"menuButtonLoad\" was not injected: check your FXML file 'file.fxml'.";
@@ -150,5 +148,7 @@ public class FileController {
 
         Button_Save.setDisable(true);
         Button_DownloadDoc.setDisable(true);
+
+        handler = new CertificatesHandler();
     }
 }
